@@ -24,12 +24,32 @@ Flight::map('rootpath', function() {
 	return __DIR__;
 });
 
+Flight::map('base', function() {
+	return pathinfo($_SERVER['SCRIPT_NAME'],PATHINFO_DIRNAME);
+});
+
+Flight::map('url', function($path='', $args=[]) {
+	$query = '';
+	if (!empty($args)) {
+		$query = '?' . http_build_query($args);
+	}
+	return pathinfo($_SERVER['SCRIPT_NAME'],PATHINFO_DIRNAME) . $path . $query;
+});
+
 Flight::map('config', function($property=null) {
 	global $config;
 	if ($property) {
 		return isset($config[$property]) ? $config[$property] : null;
 	}
 	return $config;
+});
+
+Flight::map('vincent', function(){
+	static $vincent;
+	if (!$vincent) {
+		$vincent = new severak\vincent\vincent(__DIR__ . '/cfg');
+	}
+	return $vincent;
 });
 
 Flight::map('user', function($property=null) {

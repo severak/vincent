@@ -1,3 +1,5 @@
-<script src="/st/js/kyselo.js?v=2018-01-11"></script>
+</div>
+</div>
+<script src="<?=Flight::base(); ?>/st/js/vincent.js"></script>
 </body>
 </html>
